@@ -1,6 +1,6 @@
+'use strict';
+
 var gulp = require('gulp'),
-    clean = require('gulp-clean'),
-    sass = require('gulp-sass'),
     compass = require('gulp-compass'),
     minifycss = require('gulp-minify-css'),
     concat = require('gulp-concat'),
@@ -14,42 +14,12 @@ var gulp = require('gulp'),
 var sassSrc = ['app/css/sass/styles.scss'];
 var jsSrc = ['app/js/*.js'];
 var indexHTML = ['app/index.html'];
-var bowerFiles = ['app/bower_components/bootstrap/dist/css/bootstrap.min.css',
-                    'app/bower_components/ractive/ractive.min.js'];
+var bowerJsFiles = ['app/bower_components/ractive/ractive.min.js'];
+var bowerCssFiles = ['app/bower_components/bootstrap/dist/css/bootstrap.min.css'];
 
-
-// Clean dist folder
-gulp.task('clean', function() {
-    gulp.src('dist')
-        .pipe(clean());
-});
-
-
-// Task to compile SASS files
-gulp.task('sass', function() {
-    gulp.src(sassSrc)
-        .pipe(sass())
-        .pipe(gulp.dest('app/css'));
-
-    gulp.src(sassSrc)
-        .pipe(sourcemaps.init())
-        .pipe(sass({
-            outputStyle: 'compressed'
-        }).on('error', gutil.log))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/app/css'));
-
-});
 
 // Task to compile Compass Sass files
 gulp.task('compass', function() {
-    gulp.src(sassSrc)
-        .pipe(compass({
-            css: 'app/css',
-            sass: 'app/css/sass'
-        }))
-        .pipe(gulp.dest('app/css'));
-
     gulp.src(sassSrc)
         .pipe(compass({
             css: 'dist/app/css',
@@ -59,7 +29,6 @@ gulp.task('compass', function() {
         .pipe(minifycss())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/app/css'));
-
 });
 
 // Task to concatenate and uglify js files
@@ -73,8 +42,11 @@ gulp.task('concat', function() {
 });
 
 gulp.task('copy', function() {
-    gulp.src(bowerFiles, {base: "."})
-        .pipe(gulp.dest('dist'));
+    gulp.src(bowerJsFiles)
+        .pipe(gulp.dest('dist/app/js/vendors'));
+
+    gulp.src(bowerCssFiles)
+        .pipe(gulp.dest('dist/app/css/vendors'));
 
     gulp.src(indexHTML)
         .pipe(gulp.dest('dist/app'));
@@ -89,12 +61,13 @@ gulp.task('jshint', function() {
 
 // Task to watch for changes in our file sources
 gulp.task('watch', function() {
-    gulp.watch(sassSrc,['sass']); // If any changes in 'sassSrc', perform 'sass' task
-    gulp.watch(jsSrc,['concat']); 
+    gulp.watch(sassSrc,['compass']);
+    gulp.watch(jsSrc,['concat']);
+    gulp.watch(indexHTML,['copy']);
 });
 
 
 // Default gulp task
-gulp.task('default', ['clean', 'jshint', 'compass', 'concat', 'copy']);
+gulp.task('default', ['jshint', 'compass', 'concat', 'copy']);
 
-gulp.task('watch', ['jshint', 'compass', 'concat', 'copy', 'watch']);
+gulp.task('watchall', ['jshint', 'compass', 'concat', 'copy', 'watch']);

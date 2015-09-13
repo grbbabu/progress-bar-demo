@@ -21,7 +21,7 @@ button {
         overflow: hidden;
         background-color: white;
         border: 1px solid $progressbar-border-color;
-        border-radius: 0px;
+        @include border-radius(0px);
         @include box-shadow(none);
         position: relative;
 
