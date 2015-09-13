@@ -71,3 +71,7 @@ or
 ```
 gulp test
 ```
+
+Click on the Debug button to debug the tests.
+
+To exit from the runner enter Ctrl+C in the command line prompt where the karma/gulp tests are run from.
