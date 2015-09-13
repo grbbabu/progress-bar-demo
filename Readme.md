@@ -6,19 +6,6 @@ A demo of the application can be found here:
 
 http://scott.maclure.com.au/test/progress-bars-demo.ogv
 
-## Prerequisites
-
-This application assumes that the following are installed locally in your computer.
-
-1. Git
-2. Node.js
-3. Bower
-4. Gulp
-5. Insall Ruby, add it to your path
-6. Install Sass gem
-7. Install Compass gem
-
-
 ## Running the application
 
 Clone the Git repo using the following command:
@@ -27,7 +14,31 @@ Clone the Git repo using the following command:
 git clone https://github.com/grbbabu/progress-bar-demo.git
 ```
 
-Install the development dependencies as follows:
+To run the application go to dist/app folder in progress-bar-demo folder and open the index.html file in your browser.
+
+## Developing the application
+
+### Prerequisites
+
+This application assumes that the following are installed locally in your computer.
+
+ 1. [Git](https://git-scm.com/downloads%20title=%22Git%22)
+ 2. [Node.js](https://nodejs.org/en/download/%20title=%22Node.js%22)
+ 3. Bower (npm install -g bower)
+ 4. Gulp (npm install -g gulp)
+ 5. Install [Ruby](https://www.ruby-lang.org/en/downloads/%20title=%22Ruby%22), add it to your path.
+ 6. Install Sass gem (gem install sass)
+ 7. Install Compass gem (gem install compass) 
+
+####Running the application
+
+Clone the Git repo using the following command:
+
+```
+git clone https://github.com/grbbabu/progress-bar-demo.git
+```
+
+Go to progress-bar-demo folder and install the development dependencies as follows:
 
 ```
 npm install
@@ -46,3 +57,11 @@ gulp
 ```
 
 To run the application go to dist/app folder and open the index.html file in your browser.
+
+####Running the unit tests
+
+Go to progress-bar-demo folder and run the following commands:
+
+```
+karma start
+```

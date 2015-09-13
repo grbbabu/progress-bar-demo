@@ -7,8 +7,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     gutil = require('gulp-util'),
     sourcemaps = require('gulp-sourcemaps'),
-    jshint = require('gulp-jshint');
-
+    jshint = require('gulp-jshint'),
+	Server = require('karma').Server;
 
 // Define file sources
 var sassSrc = ['app/css/sass/styles.scss'];
@@ -16,7 +16,6 @@ var jsSrc = ['app/js/*.js'];
 var indexHTML = ['app/index.html'];
 var bowerJsFiles = ['app/bower_components/ractive/ractive.min.js'];
 var bowerCssFiles = ['app/bower_components/bootstrap/dist/css/bootstrap.min.css'];
-
 
 // Task to compile Compass Sass files
 gulp.task('compass', function() {
@@ -41,6 +40,7 @@ gulp.task('concat', function() {
         .pipe(gulp.dest('dist/app/js'));
 });
 
+// Task to concatenate and uglify js files
 gulp.task('copy', function() {
     gulp.src(bowerJsFiles)
         .pipe(gulp.dest('dist/app/js/vendors'));
@@ -52,6 +52,7 @@ gulp.task('copy', function() {
         .pipe(gulp.dest('dist/app'));
 });
 
+// Task to run linting
 gulp.task('jshint', function() {
     gulp.src(jsSrc)
         .pipe(jshint())
@@ -64,6 +65,13 @@ gulp.task('watch', function() {
     gulp.watch(sassSrc,['compass']);
     gulp.watch(jsSrc,['concat']);
     gulp.watch(indexHTML,['copy']);
+});
+
+// Task to debug the tests.
+gulp.task('test', function (done) {
+    new Server({
+        configFile: __dirname + '/karma.conf.js'
+    }, done).start();
 });
 
 

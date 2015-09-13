@@ -31,12 +31,6 @@ var progressRactive;
             this.get("progressBars").forEach(function(elem, index) {
                 this.isValidProgressBar(elem.currentValue, index);
             }.bind(this));
-        }
-    });
-
-    progressRactive.on({
-        setProgressBar:function(event, chooseProgressBar) {
-            this.set("selectedProgressBar", chooseProgressBar);
         },
         updateProgressBar: function(event, valueToAdd) {
             var index = this.get("selectedProgressBar");
@@ -46,6 +40,12 @@ var progressRactive;
             }
             this.set("progressBars." + index + ".currentValue", newValue);
             this.isValidProgressBar(newValue, index);
+        }
+    });
+
+    progressRactive.on({
+        updateProgressBar: function(event, valueToAdd) {
+            this.updateProgressBar(event, valueToAdd);
         }
     });
 }());
