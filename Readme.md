@@ -65,3 +65,9 @@ Go to progress-bar-demo folder and run the following commands:
 ```
 karma start
 ```
+
+or 
+
+```
+gulp test
+```
