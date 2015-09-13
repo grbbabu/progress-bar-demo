@@ -1,0 +1,48 @@
+@import "compass/css3";
+
+$progressbar-normal-color: #AFD7E6;
+$progressbar-danger-color: red;
+$progressbar-border-color: #CDCBCD;
+$progressbar-text-color: black;
+
+body {
+    padding: 10px;
+}
+
+button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.progressbar-container {
+    .progress {
+        height: 40px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        background-color: white;
+        border: 1px solid $progressbar-border-color;
+        border-radius: 0px;
+        @include box-shadow(none);
+        position: relative;
+
+        .progress-bar-danger {
+            background-color: $progressbar-danger-color;
+        }
+
+        span {
+            margin-top: 8px;
+            position: absolute;
+            display: block;
+            width: 100%;
+            color: $progressbar-text-color;
+        }
+    }
+
+    .progress-bar {
+        background-color: $progressbar-normal-color;
+        @include box-shadow(none);
+        @include transition-property(width);
+        @include transition-duration(0.5s);
+        @include transition-timing-function(ease);
+    }
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Progress Bar Demo</title>
+</head>
+<body>
+<!-- Element where Ractive is rendered. -->
+<div id="progressContainer" class="progressbar-container"></div>
+
+<!-- Template to render -->
+<script id="progressTemplate" type="text/ractive">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              {{#each progressBars:i}}
+                {{>progressBar}}
+              {{/each}}
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="col-md-4">
+                    <select class="form-control" onchange="progressRactive.set({selectedProgressBar:this.value})">
+                        {{#each progressBars:i}}
+                            {{>progressBarOption}}
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="col-md-8">
+                    {{#each progressBarButtons:i}}
+                        {{>progressBarButton}}
+                    {{/each}}
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+    {{#partial progressBar}}
+        <div class="progress">
+            <div class="progress-bar {{ isValid ? '' : 'progress-bar-danger' }}" role="progressbar"
+                aria-valuenow="{{currentValue}}" aria-valuemin="0" aria-valuemax="100" style="width:{{currentValue}}%">
+                <span>{{currentValue}}%</span>
+            </div>
+        </div>
+    {{/progressBar}}
+
+    {{#partial progressBarOption}}
+        <option value="{{i}}">#progress {{i+1}}</option>
+    {{/progressBarOption}}
+
+    {{#partial progressBarButton}}
+        <button type="button" class="btn btn-default" on-click="updateProgressBar:{{parseInt(value)}}">
+            {{value}}
+        </button>
+    {{/progressBarButton}}
+</script>
+
+<script src="bower_components/ractive/ractive.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

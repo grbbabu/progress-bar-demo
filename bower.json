@@ -1,0 +1,21 @@
+{
+  "name": "Ractive Project",
+  "version": ".0.1",
+  "authors": [
+    "Ramesh Babu <rameshbabugopalakrishnan@gmail.com>"
+  ],
+  "description": "Ractive Project",
+  "main": "app/app.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "ractive": "~0.7.3"
+  }
+}
