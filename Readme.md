@@ -13,9 +13,10 @@ This application assumes that the following are installed locally in your comput
 1. Git
 2. Node.js
 3. Bower
-4. Insall Ruby, add it to your path
-5. Install Sass gem
-6. Install Compass gem
+4. Gulp
+5. Insall Ruby, add it to your path
+6. Install Sass gem
+7. Install Compass gem
 
 
 ## Running the application
